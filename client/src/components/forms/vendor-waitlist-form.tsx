@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -44,9 +44,16 @@ export default function VendorWaitlistForm({ open, onOpenChange, selectedRole }:
     defaultValues: {
       name: "",
       contact: "",
-      role: selectedRole || "",
+      role: "",
     },
   });
+
+  // Update form when dialog opens with a selected role
+  useEffect(() => {
+    if (open && selectedRole) {
+      form.setValue("role", selectedRole);
+    }
+  }, [open, selectedRole, form]);
 
   const mutation = useMutation({
     mutationFn: async (data: InsertVendorWaitlist) => {
