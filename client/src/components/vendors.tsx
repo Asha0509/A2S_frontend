@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Home, Paintbrush, Briefcase, Hammer, Percent, DollarSign, Users, PieChart, Phone, GraduationCap } from "lucide-react";
-import VendorWaitlistForm from "@/components/forms/vendor-waitlist-form";
+import VendorWaitlistForm from "./forms/vendor-waitlist-form";
 
 export default function Vendors() {
   const [showVendorForm, setShowVendorForm] = useState(false);

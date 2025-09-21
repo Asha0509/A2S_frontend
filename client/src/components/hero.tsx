@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import UserWaitlistForm from "@/components/forms/user-waitlist-form";
-import VendorWaitlistForm from "@/components/forms/vendor-waitlist-form";
+import VendorWaitlistForm from "./forms/vendor-waitlist-form";
 
 export default function Hero() {
   const [showUserForm, setShowUserForm] = useState(false);
