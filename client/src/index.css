@@ -171,8 +171,24 @@
     animation-delay: 4s;
   }
   
-  /* Hover Scale */
-  .hover:scale-102:hover {
-    transform: scale(1.02);
+  /* Motion-safe animations */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-float,
+    .animate-spin-slow,
+    .animate-pulse,
+    .animate-bounce {
+      animation: none;
+    }
+    
+    .hover-lift:hover,
+    .hover\\:scale-105:hover,
+    .hover\\:scale-102:hover {
+      transform: none;
+    }
+  }
+  
+  /* Enhanced contrast for accessibility */
+  .bg-blue-50:hover {
+    background-color: rgb(239 246 255);
   }
 }

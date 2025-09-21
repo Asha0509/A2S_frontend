@@ -144,10 +144,10 @@ export default function Header() {
                 Contact
               </button>
               <div className="flex flex-col space-y-2 px-3 pt-2">
-                <Button variant="outline" className="btn-secondary" data-testid="mobile-button-login">
+                <Button variant="outline" className="border-2 border-slate-300 text-slate-700 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300" data-testid="mobile-button-login">
                   Login
                 </Button>
-                <Button className="btn-primary" data-testid="mobile-button-signup">
+                <Button className="bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-700 hover:to-emerald-700 text-white transition-all duration-300" data-testid="mobile-button-signup">
                   Sign Up
                 </Button>
               </div>
