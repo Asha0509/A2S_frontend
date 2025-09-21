@@ -33,11 +33,19 @@ export const insertUserSchema = createInsertSchema(users).pick({
 export const insertUserWaitlistSchema = createInsertSchema(userWaitlist).omit({
   id: true,
   createdAt: true,
+}).extend({
+  name: z.string().min(1, "Name is required"),
+  contact: z.string().email("Please enter a valid email address"),
+  preferredPlan: z.string().min(1, "Please select a preferred plan"),
 });
 
 export const insertVendorWaitlistSchema = createInsertSchema(vendorWaitlist).omit({
   id: true,
   createdAt: true,
+}).extend({
+  name: z.string().min(1, "Name is required"),
+  contact: z.string().email("Please enter a valid email address"),
+  role: z.string().min(1, "Please select a role"),
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
