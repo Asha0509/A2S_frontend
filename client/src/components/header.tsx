@@ -14,13 +14,13 @@ export default function Header() {
   };
 
   return (
-    <header className="bg-card border-b border-border sticky top-0 z-50" data-testid="header">
+    <header className="bg-white/90 backdrop-blur-lg border-b border-slate-200/50 sticky top-0 z-50 shadow-lg" data-testid="header">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0" data-testid="logo">
-            <div className="text-xl font-bold text-primary">
-              A2S <span className="text-muted-foreground font-normal">/ Aesthetics to Spaces</span>
+            <div className="text-xl font-bold bg-gradient-to-r from-blue-600 to-emerald-600 bg-clip-text text-transparent">
+              A2S <span className="text-slate-600 font-normal bg-gradient-to-r from-slate-600 to-slate-500 bg-clip-text text-transparent">/ Aesthetics to Spaces</span>
             </div>
           </div>
           
@@ -29,38 +29,43 @@ export default function Header() {
             <div className="ml-10 flex items-baseline space-x-8">
               <button 
                 onClick={() => scrollToSection('about')} 
-                className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-colors"
+                className="text-slate-600 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 relative group"
                 data-testid="nav-about"
               >
                 About
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-emerald-500 group-hover:w-full transition-all duration-300"></div>
               </button>
               <button 
                 onClick={() => scrollToSection('plans')} 
-                className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-colors"
+                className="text-slate-600 hover:text-purple-600 px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 relative group"
                 data-testid="nav-plans"
               >
                 Plans
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-purple-500 to-pink-500 group-hover:w-full transition-all duration-300"></div>
               </button>
               <button 
                 onClick={() => scrollToSection('features')} 
-                className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-colors"
+                className="text-slate-600 hover:text-emerald-600 px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 relative group"
                 data-testid="nav-features"
               >
                 Features
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-emerald-500 to-cyan-500 group-hover:w-full transition-all duration-300"></div>
               </button>
               <button 
                 onClick={() => scrollToSection('vendors')} 
-                className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-colors"
+                className="text-slate-600 hover:text-orange-600 px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 relative group"
                 data-testid="nav-vendors"
               >
                 Vendors
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-500 to-red-500 group-hover:w-full transition-all duration-300"></div>
               </button>
               <button 
                 onClick={() => scrollToSection('contact')} 
-                className="text-muted-foreground hover:text-foreground px-3 py-2 text-sm font-medium transition-colors"
+                className="text-slate-600 hover:text-indigo-600 px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 relative group"
                 data-testid="nav-contact"
               >
                 Contact
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-indigo-500 to-purple-500 group-hover:w-full transition-all duration-300"></div>
               </button>
             </div>
           </div>
@@ -69,13 +74,13 @@ export default function Header() {
           <div className="hidden md:flex items-center space-x-4">
             <Button 
               variant="outline" 
-              className="btn-secondary"
+              className="border-2 border-slate-300 text-slate-700 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300 hover:scale-105"
               data-testid="button-login"
             >
               Login
             </Button>
             <Button 
-              className="btn-primary"
+              className="bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-blue-700 hover:to-emerald-700 text-white transition-all duration-300 hover:scale-105 hover:shadow-lg"
               data-testid="button-signup"
             >
               Sign Up
