@@ -7,66 +7,86 @@ import VendorWaitlistForm from "./forms/vendor-waitlist-form";
 
 export default function Vendors() {
   const [showVendorForm, setShowVendorForm] = useState(false);
+  const [selectedRole, setSelectedRole] = useState("");
+  const [expandedCards, setExpandedCards] = useState<Record<string, boolean>>({});
+
+  const toggleCard = (roleId: string) => {
+    setExpandedCards(prev => ({
+      ...prev,
+      [roleId]: !prev[roleId]
+    }));
+  };
 
   const roles = [
     {
+      id: "vastu",
       icon: Home,
       title: "Vastu Consultants",
-      subtitle: "Professionals only"
+      subtitle: "Professionals only",
+      description: "Provide traditional Vastu Shastra consultation for homes and commercial spaces to ensure positive energy flow and prosperity.",
+      commission: "10–12%",
+      benefits: [
+        "High-value consultations with premium clients",
+        "Flexible scheduling for site visits",
+        "Commission-based earnings with bonuses",
+        "Professional certification support",
+        "Access to exclusive client referrals"
+      ],
+      nonPaidExperience: false
     },
     {
+      id: "interior",
       icon: Paintbrush,
       title: "Interior Consultants",
-      subtitle: "Students/artists allowed"
+      subtitle: "Students/artists allowed",
+      description: "Create beautiful, functional interior designs for residential and commercial spaces using the latest design trends and technologies.",
+      commission: "8–12%",
+      benefits: [
+        "Portfolio building opportunities",
+        "Access to design software and tools",
+        "Mentorship from experienced designers",
+        "Client management dashboard",
+        "Flexible project timelines"
+      ],
+      nonPaidExperience: true
     },
     {
+      id: "business",
       icon: Briefcase,
       title: "Business Consultants",
-      subtitle: "Students/artists allowed"
+      subtitle: "Students/artists allowed",
+      description: "Help businesses optimize their commercial spaces for productivity, efficiency, and employee satisfaction.",
+      commission: "8–12%",
+      benefits: [
+        "Corporate client access",
+        "Business development training",
+        "Performance-based bonuses",
+        "Professional networking opportunities",
+        "Project management tools"
+      ],
+      nonPaidExperience: true
     },
     {
+      id: "factory",
       icon: Hammer,
       title: "Factories / Carpenters / Furniture Makers",
-      subtitle: "Professionals only"
-    }
-  ];
-
-  const benefits = [
-    {
-      icon: Percent,
-      title: "8–12% Commission per Transaction",
-      description: "Competitive rates based on transaction value"
-    },
-    {
-      icon: DollarSign,
-      title: "Standard Monthly Payment + Bonus",
-      description: "Regular income plus performance-based bonuses"
-    },
-    {
-      icon: Users,
-      title: "Direct Access to Local Customers",
-      description: "Connect with customers in your area"
-    },
-    {
-      icon: PieChart,
-      title: "Dashboard for Management",
-      description: "Manage bookings, pricing, and portfolio"
-    },
-    {
-      icon: Phone,
-      title: "Personal Onboarding",
-      description: "Phone call and portfolio review"
-    },
-    {
-      icon: GraduationCap,
-      title: "Non-paid Experience Allowed",
-      description: "For eligible students/artists (interior & business consultants only)"
+      subtitle: "Professionals only",
+      description: "Partner with us to provide high-quality custom furniture, fixtures, and construction services for our design projects.",
+      commission: "8–10%",
+      benefits: [
+        "Bulk order opportunities",
+        "Regular project flow",
+        "Material sourcing support",
+        "Quality certification programs",
+        "Direct client connections"
+      ],
+      nonPaidExperience: false
     }
   ];
 
   return (
     <>
-      <section id="vendors" className="py-20 bg-card" data-testid="vendors-section">
+      <section id="vendors" className="py-20 bg-background" data-testid="vendors-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-primary mb-4" data-testid="vendors-title">
@@ -77,88 +97,127 @@ export default function Vendors() {
             </p>
           </div>
           
-          <div className="grid lg:grid-cols-2 gap-12 mb-16">
-            {/* Roles & Categories */}
-            <div>
-              <h3 className="text-2xl font-semibold text-primary mb-8" data-testid="roles-title">
-                Available Roles & Categories
-              </h3>
-              <div className="space-y-6" data-testid="roles-list">
-                {roles.map((role, index) => (
-                  <div 
-                    key={index}
-                    className="flex items-start gap-4 p-4 bg-muted rounded-lg"
-                    data-testid={`role-${index}`}
-                  >
-                    <div className="text-primary text-xl">
+          {/* Role Cards Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-6" data-testid="roles-grid">
+            {roles.map((role) => (
+              <Card key={role.id} className="bg-card border border-border hover:shadow-lg transition-shadow">
+                <CardHeader className="pb-4">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="text-primary">
                       <role.icon className="w-6 h-6" />
                     </div>
                     <div>
-                      <h4 className="font-semibold text-primary" data-testid={`role-title-${index}`}>
-                        {role.title}
-                      </h4>
-                      <p className="text-muted-foreground text-sm" data-testid={`role-subtitle-${index}`}>
-                        {role.subtitle}
-                      </p>
+                      <CardTitle className="text-lg text-primary">{role.title}</CardTitle>
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
-            
-            {/* Vendor Benefits */}
-            <div>
-              <h3 className="text-2xl font-semibold text-primary mb-8" data-testid="benefits-title">
-                Vendor Benefits
-              </h3>
-              <div className="space-y-6" data-testid="benefits-list">
-                {benefits.map((benefit, index) => (
-                  <div 
-                    key={index}
-                    className="flex items-start gap-4"
-                    data-testid={`benefit-${index}`}
+                  <CardDescription className="text-sm text-muted-foreground">
+                    {role.subtitle}
+                  </CardDescription>
+                </CardHeader>
+                
+                <CardContent className="pt-0">
+                  <p className="text-sm text-muted-foreground mb-4">
+                    {role.description}
+                  </p>
+                  
+                  <Collapsible 
+                    open={expandedCards[role.id]} 
+                    onOpenChange={() => toggleCard(role.id)}
                   >
-                    <div className="text-green-500 text-xl">
-                      <benefit.icon className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-primary" data-testid={`benefit-title-${index}`}>
-                        {benefit.title}
-                      </h4>
-                      <p className="text-muted-foreground text-sm" data-testid={`benefit-description-${index}`}>
-                        {benefit.description}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          
-          {/* CTA Section */}
-          <div className="text-center">
-            <div className="bg-gradient-to-r from-primary to-primary/80 rounded-2xl p-8 text-white" data-testid="vendor-cta">
-              <h3 className="text-2xl font-bold mb-4" data-testid="cta-title">
-                Ready to Join Our Network?
-              </h3>
-              <p className="text-lg mb-6 opacity-90" data-testid="cta-description">
-                Learn more about opportunities → Choose your role → See detailed benefits → Join waitlist
-              </p>
-              <Button 
-                onClick={() => setShowVendorForm(true)}
-                className="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
-                data-testid="button-join-vendor-waitlist"
-              >
-                Join Vendor Waitlist
-              </Button>
-            </div>
+                    <CollapsibleTrigger asChild>
+                      <Button 
+                        variant="outline" 
+                        className="w-full mb-4 justify-between"
+                        data-testid={`learn-more-${role.id}`}
+                      >
+                        Learn More
+                        {expandedCards[role.id] ? (
+                          <ChevronUp className="h-4 w-4" />
+                        ) : (
+                          <ChevronDown className="h-4 w-4" />
+                        )}
+                      </Button>
+                    </CollapsibleTrigger>
+                    
+                    <CollapsibleContent className="space-y-4">
+                      {/* Commission */}
+                      <div className="bg-muted/50 rounded-lg p-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Percent className="h-4 w-4 text-green-600" />
+                          <h4 className="font-semibold text-primary">Commission</h4>
+                        </div>
+                        <p className="text-sm text-muted-foreground">{role.commission} per transaction</p>
+                      </div>
+                      
+                      {/* Benefits */}
+                      <div className="bg-muted/50 rounded-lg p-4">
+                        <div className="flex items-center gap-2 mb-3">
+                          <Users className="h-4 w-4 text-blue-600" />
+                          <h4 className="font-semibold text-primary">Benefits</h4>
+                        </div>
+                        <ul className="space-y-2">
+                          {role.benefits.map((benefit, index) => (
+                            <li key={index} className="text-sm text-muted-foreground flex items-start gap-2">
+                              <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
+                              {benefit}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      
+                      {/* Standard Benefits */}
+                      <div className="bg-muted/50 rounded-lg p-4">
+                        <div className="flex items-center gap-2 mb-3">
+                          <PieChart className="h-4 w-4 text-purple-600" />
+                          <h4 className="font-semibold text-primary">Standard Benefits</h4>
+                        </div>
+                        <ul className="space-y-2 text-sm text-muted-foreground">
+                          <li className="flex items-start gap-2">
+                            <DollarSign className="h-3 w-3 mt-1 text-green-500" />
+                            Standard monthly payment + bonus
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <PieChart className="h-3 w-3 mt-1 text-blue-500" />
+                            Dashboard for management
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <Phone className="h-3 w-3 mt-1 text-orange-500" />
+                            Personal onboarding support
+                          </li>
+                          {role.nonPaidExperience && (
+                            <li className="flex items-start gap-2">
+                              <GraduationCap className="h-3 w-3 mt-1 text-indigo-500" />
+                              Non-paid experience allowed
+                            </li>
+                          )}
+                        </ul>
+                      </div>
+                    </CollapsibleContent>
+                  </Collapsible>
+                </CardContent>
+                
+                <CardFooter className="pt-0">
+                  <Button 
+                    onClick={() => {
+                      setSelectedRole(role.id);
+                      setShowVendorForm(true);
+                    }}
+                    className="w-full"
+                    data-testid={`join-waitlist-${role.id}`}
+                  >
+                    Join Waitlist
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
       <VendorWaitlistForm 
         open={showVendorForm} 
-        onOpenChange={setShowVendorForm} 
+        onOpenChange={setShowVendorForm}
+        selectedRole={selectedRole}
       />
     </>
   );

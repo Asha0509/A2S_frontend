@@ -32,9 +32,10 @@ import {
 interface VendorWaitlistFormProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  selectedRole?: string;
 }
 
-export default function VendorWaitlistForm({ open, onOpenChange }: VendorWaitlistFormProps) {
+export default function VendorWaitlistForm({ open, onOpenChange, selectedRole }: VendorWaitlistFormProps) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -43,7 +44,7 @@ export default function VendorWaitlistForm({ open, onOpenChange }: VendorWaitlis
     defaultValues: {
       name: "",
       contact: "",
-      role: "",
+      role: selectedRole || "",
     },
   });
 
