@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Home, Paintbrush, Briefcase, Hammer, Percent, DollarSign, Users, PieChart, Phone, GraduationCap } from "lucide-react";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Home, Paintbrush, Briefcase, Hammer, Percent, DollarSign, Users, PieChart, Phone, GraduationCap, ChevronDown, ChevronUp } from "lucide-react";
 import VendorWaitlistForm from "./forms/vendor-waitlist-form";
 
 export default function Vendors() {
