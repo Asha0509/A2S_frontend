@@ -67,7 +67,7 @@ export default function Vendors() {
       nonPaidExperience: true
     },
     {
-      id: "factory",
+      id: "carpenter",
       icon: Hammer,
       title: "Factories / Carpenters / Furniture Makers",
       subtitle: "Professionals only",
